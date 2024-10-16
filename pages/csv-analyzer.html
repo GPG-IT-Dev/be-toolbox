@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BE-ToolBox - Analyseur CSV Amélioré</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Style for the download buttons container */
@@ -22,7 +24,7 @@
             border-radius: 8px;
         }
 
-        .download-button {
+        .download-button, .copy-button {
             background-color: #00D699;
             color: white;
             font-weight: bold;
@@ -37,16 +39,15 @@
             text-align: center;
         }
 
-        .download-button i {
+        .download-button i, .copy-button i {
             font-size: 1.2rem;
         }
 
-        .download-button:hover {
+        .download-button:hover, .copy-button:hover {
             background-color: #007d4f;
             transform: scale(1.05);
         }
 
-        /* Styles for category-related buttons */
         .priority-button {
             background-color: #00B682;
         }
@@ -77,16 +78,19 @@
             <p>Chargez et analysez vos fichiers CSV en toute simplicité.</p>
         </header>
         
-        <main class="w-full flex flex-col items-center mt-12 px-8">
-            <div id="drop-area" class="rounded-lg w-full max-w-5xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
-                <form class="my-form">
-                    <label for="fileElem" class="form-button text-white font-bold rounded mb-4 bg-[#00D699] transition-all duration-300 ease-in-out transform hover:scale-105 inline-block cursor-pointer px-6 py-3">
-                        <i class="fas fa-file-upload mr-2"></i> Sélectionner un fichier CSV
-                    </label>
-                    <p class="text-gray-700 mt-2">Faites glisser et déposez un fichier CSV ici ou cliquez pour sélectionner un fichier</p>
-                    <input type="file" id="fileElem" accept=".csv" onchange="gererFichiers(this.files)" class="hidden">
-                </form>
-            </div>
+<main class="w-full flex flex-col items-center mt-12 px-8">
+    <div id="drop-area" class="rounded-lg w-full max-w-5xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
+        <form class="my-form">
+            <!-- Ajout de style pour améliorer la visibilité -->
+            <label for="fileElem" class="form-button text-black font-bold rounded mb-4 bg-[#00D699] hover:bg-[#007d4f] transition-all duration-300 ease-in-out transform hover:scale-105 inline-block cursor-pointer px-6 py-3">
+                <i class="fas fa-file-upload mr-2"></i> Sélectionner un fichier CSV
+            </label>
+            <p class="text-gray-700 mt-2">Faites glisser et déposez un fichier CSV ici ou cliquez pour sélectionner un fichier</p>
+            <input type="file" id="fileElem" accept=".csv" onchange="gererFichiers(this.files)" class="hidden">
+        </form>
+    </div>
+
+
             
             <section id="csv-table-container" class="w-full max-w-5xl overflow-auto mt-8 shadow-lg rounded-lg">
                 <table id="csv-table" class="min-w-full border-collapse bg-white rounded-lg">
@@ -111,7 +115,7 @@
                 </table>
             </section>
 
-            <section id="sums" class="w-full max-w-5xl mt-8 p-6 rounded-lg shadow-md bg-white">
+            <section id="sums" class="w-full max-w-5xl mt-8 p-6 rounded-lg text-center shadow-md bg-white">
                 <h2 class="text-3xl font-semibold mb-4 text-[#00D699]">Sommes Calculées</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <p id="sum-cubage" class="bg-gray-100 p-4 rounded shadow-inner border text-gray-800">Somme de CUBAGE: 0</p>
@@ -132,11 +136,7 @@
     <!-- Conteneur des boutons en bas à droite -->
     <div id="download-buttons-container">
         <button id="download-category-cubage" class="download-button priority-button"><i class="fas fa-download"></i> Télécharger Cubage par Catégorie</button>
-        <button id="download-category-poids" class="download-button priority-button"><i class="fas fa-download"></i> Télécharger Poids par Catégorie</button>
-        <button id="download-category-summary" class="download-button priority-button"><i class="fas fa-download"></i> Télécharger Résumé par Catégorie</button>
-        <button id="download-summary" class="download-button"><i class="fas fa-download"></i> Télécharger le Résumé des Sommes</button>
-        <button id="download-cubage" class="download-button"><i class="fas fa-download"></i> Télécharger Cubage</button>
-        <button id="download-poids" class="download-button"><i class="fas fa-download"></i> Télécharger Poids</button>
+        <button id="copy-category-cubage" class="copy-button"><i class="fas fa-copy"></i> Copier Cubage par Catégorie</button>
     </div>
 
     <!-- Inclure le fichier JavaScript à la fin -->
