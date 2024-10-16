@@ -5,7 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const sommeCubageElem = document.getElementById('sum-cubage');
     const sommePoidsElem = document.getElementById('sum-poids');
     const categorieCubageElem = document.getElementById('category-cubage');
+    const categoriePoidsElem = document.getElementById('category-poids');
     const bandeauSucces = document.createElement('div');
+
+    const categories = {
+        "Accessoire": ["piec", "acc"],
+        "Banc": ["ban"],
+        "Cendrier": ["cen"],
+        "Colonne": ["cln"],
+        "Columbarium": ["col"],
+        "Dallage": ["dal"],
+        "Dalle Cavurne": ["cav"],
+        "Entourage": ["ent"],
+        "Monument": ["sbs", "srbs", "tomb", "stele", "cofint", "cof", "socle", "tombale", "coffret"],
+        "Pièce": ["pie", "piece"],
+        "Plinthe / Placage": ["plt", "plinthes"],
+        "Pupitre": ["pup"],
+        "Registre": ["reg"],
+        "Semelle": ["sem", "semelle"],
+        "Stèle du Souvenir": ["sts"],
+        "Table": ["tab"]
+    };
 
     // Ajouter un bandeau de notification de copie réussi
     bandeauSucces.id = 'bandeau-succes';
@@ -92,31 +112,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function calculerSommes(donnees) {
         const sommes = {};
+
         donnees.forEach(ligne => {
             if (ligne.length < 11) return;
+            const groupe = (ligne[2] || '').toLowerCase().replace(/\d+$/, ""); // Retirer les chiffres à la fin pour identifier les catégories
             const cubage = parseFloat(ligne[10]) || 0;
-            const categorie = (ligne[2] || '').toLowerCase().replace(/\d+$/, "");
-            if (!sommes[categorie]) {
-                sommes[categorie] = { cubage: 0 };
+            const poids = parseFloat(ligne[9]) || 0;
+
+            // Vérifier si le groupe appartient à une des catégories définies
+            for (const categorie in categories) {
+                if (categories[categorie].some(code => groupe.startsWith(code))) {
+                    if (!sommes[categorie]) {
+                        sommes[categorie] = { cubage: 0, poids: 0 };
+                    }
+                    sommes[categorie].cubage += cubage;
+                    sommes[categorie].poids += poids;
+                    break;
+                }
             }
-            sommes[categorie].cubage += cubage;
         });
 
+        // Calcul des sommes globales
         let totalCubage = Object.values(sommes).reduce((acc, s) => acc + s.cubage, 0);
-        sommeCubageElem.textContent = `Somme de CUBAGE: ${totalCubage.toFixed(2)} m³`;
+        let totalPoids = Object.values(sommes).reduce((acc, s) => acc + s.poids, 0);
+
+        // Affichage des sommes globales
+        sommeCubageElem.textContent = `Somme de CUBAGE: ${totalCubage.toFixed(5)} m³`;
+        sommePoidsElem.textContent = `Somme de POIDS: ${totalPoids.toFixed(2)} kg`;
+
+        // Affichage des sommes par catégorie
         afficherSommesCategories(sommes);
     }
 
     function afficherSommesCategories(sommes) {
         categorieCubageElem.innerHTML = '';
+        categoriePoidsElem.innerHTML = '';
 
         const cubages = [];
+        const poids = [];
+
         for (const categorie in sommes) {
-            const cubageElem = `Cubage ${categorie}: ${sommes[categorie].cubage.toFixed(2)} m³`;
+            const cubageElem = `Cubage ${categorie}: ${sommes[categorie].cubage.toFixed(5)} m³`;
             cubages.push(cubageElem);
+
+            const poidsElem = `Poids ${categorie}: ${sommes[categorie].poids.toFixed(2)} kg`;
+            poids.push(poidsElem);
         }
 
         categorieCubageElem.innerHTML = cubages.join('<br>');
+        categoriePoidsElem.innerHTML = poids.join('<br>');
     }
 
     // Copier le cubage par catégorie

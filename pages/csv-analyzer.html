@@ -6,7 +6,6 @@
     <title>BE-ToolBox - Analyseur CSV Amélioré</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Style for the download buttons container */
@@ -63,10 +62,14 @@
             <img src="https://www.seiven.com/wp-content/uploads/2024/09/Logo-blanc-3-Seiven-2024.webp" alt="Logo BE-ToolBox" class="w-full mb-12">
             <ul class="space-y-6">
                 <li><a href="csv-analyzer.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m2 4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m2 4a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                     Analyseur CSV Amélioré</a></li>
                 <li><a href="barcode-generator.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
                     Générateur de code-barres</a></li>
             </ul>
         </div>
@@ -78,20 +81,17 @@
             <p>Chargez et analysez vos fichiers CSV en toute simplicité.</p>
         </header>
         
-<main class="w-full flex flex-col items-center mt-12 px-8">
-    <div id="drop-area" class="rounded-lg w-full max-w-5xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
-        <form class="my-form">
-            <!-- Ajout de style pour améliorer la visibilité -->
-            <label for="fileElem" class="form-button text-black font-bold rounded mb-4 bg-[#00D699] hover:bg-[#007d4f] transition-all duration-300 ease-in-out transform hover:scale-105 inline-block cursor-pointer px-6 py-3">
-                <i class="fas fa-file-upload mr-2"></i> Sélectionner un fichier CSV
-            </label>
-            <p class="text-gray-700 mt-2">Faites glisser et déposez un fichier CSV ici ou cliquez pour sélectionner un fichier</p>
-            <input type="file" id="fileElem" accept=".csv" onchange="gererFichiers(this.files)" class="hidden">
-        </form>
-    </div>
+        <main class="w-full flex flex-col items-center mt-12 px-8">
+            <div id="drop-area" class="rounded-lg w-full max-w-5xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
+                <form class="my-form">
+                    <label for="fileElem" class="form-button text-black font-bold rounded mb-4 bg-[#00D699] hover:bg-[#007d4f] transition-all duration-300 ease-in-out transform hover:scale-105 inline-block cursor-pointer px-6 py-3">
+                        <i class="fas fa-file-upload mr-2"></i> Sélectionner un fichier CSV
+                    </label>
+                    <p class="text-gray-700 mt-2">Faites glisser et déposez un fichier CSV ici ou cliquez pour sélectionner un fichier</p>
+                    <input type="file" id="fileElem" accept=".csv" onchange="gererFichiers(this.files)" class="hidden">
+                </form>
+            </div>
 
-
-            
             <section id="csv-table-container" class="w-full max-w-5xl overflow-auto mt-8 shadow-lg rounded-lg">
                 <table id="csv-table" class="min-w-full border-collapse bg-white rounded-lg">
                     <thead>
