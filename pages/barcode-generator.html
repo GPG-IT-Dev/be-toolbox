@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE-ToolBox - Générateur de code-barres</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.5.0/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50">
+    <div id="sidebar" class="bg-white shadow-2xl w-64 p-6 fixed h-full flex flex-col justify-between">
+        <div>
+            <img src="https://www.seiven.com/wp-content/uploads/2024/09/Logo-blanc-3-Seiven-2024.webp" alt="Logo BE-ToolBox" class="w-full mb-12">
+            <ul class="space-y-6">
+                <li><a href="csv-analyzer.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m2 4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Analyseur CSV Amélioré</a></li>
+                <li><a href="barcode-generator.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                    Générateur de code-barres</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="main-content" class="ml-72 flex-1">
+        <header class="w-full text-white text-center bg-gradient-to-r from-[#00D699] to-[#00B682] py-8 shadow-md rounded-b-lg">
+            <h1 class="text-4xl font-bold drop-shadow-lg">Générateur de Code-Barres</h1>
+            <p class="text-lg mt-2">Générez facilement des codes-barres pour vos besoins professionnels.</p>
+        </header>
+        
+        <main class="w-full flex flex-col items-center mt-12 px-4">
+            <div id="barcode-generator" class="rounded-lg w-full max-w-2xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
+                <form class="my-form">
+                    <label for="text-input" class="block text-gray-700 font-semibold mb-2">Données pour le code-barres :</label>
+                    <input type="text" id="text-input" placeholder="Entrez les données pour le code-barres" class="border border-gray-300 rounded p-4 mt-2 w-full focus:outline-none focus:ring-2 focus:ring-[#00D699]">
+                    <div class="flex justify-center mt-6 gap-4">
+                        <button id="generate-btn" class="text-white font-bold rounded px-6 py-3 bg-[#00D699] hover:bg-[#00B682] transition-all duration-300 ease-in-out" type="button">
+                            <i class="fas fa-barcode mr-2"></i> Générer un code-barres
+                        </button>
+                        <button id="clear-btn" class="text-white font-bold rounded px-6 py-3 bg-red-500 hover:bg-red-600 transition-all duration-300 ease-in-out" type="button">
+                            <i class="fas fa-times mr-2"></i> Effacer
+                        </button>
+                        <button id="print-btn" class="text-white font-bold rounded px-6 py-3 bg-blue-500 hover:bg-blue-600 transition-all duration-300 ease-in-out" type="button">
+                            <i class="fas fa-print mr-2"></i> Imprimer
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <section id="barcode-display" class="w-full max-w-3xl p-6 bg-[#00D699] rounded-lg mt-6 shadow-md">
+                <h2 class="text-2xl font-semibold text-white">Code-barres généré</h2>
+                <div class="flex justify-center">
+                    <canvas id="barcode" class="mt-4 bg-white p-4 rounded shadow-md"></canvas>
+                </div>
+                <div class="mt-4 flex gap-4 justify-center">
+                    <button id="download-btn" class="text-[#00D699] font-bold py-2 px-3 rounded bg-white border border-[#00D699] transition-all duration-300 ease-in-out">Télécharger le code-barres</button>
+                    <button id="share-btn" class="text-white font-bold py-2 px-3 rounded bg-yellow-500 transition-all duration-300 ease-in-out">Partager</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../js/barcode-generator.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const canvas = document.getElementById('barcode');
+            const link = document.createElement('a');
+            link.download = 'barcode.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            document.getElementById('text-input').value = '';
+            const canvas = document.getElementById('barcode');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        document.getElementById('print-btn').addEventListener('click', function() {
+            const canvas = document.getElementById('barcode');
+            const dataUrl = canvas.toDataURL();
+            let windowContent = '<!DOCTYPE html>';
+            windowContent += '<html>'; 
+            windowContent += '<head><title>Print barcode</title></head>'; 
+            windowContent += '<body>'; 
+            windowContent += '<img src="' + dataUrl + '">';
+            windowContent += '</body>'; 
+            windowContent += '</html>'; 
+            const printWin = window.open('', '', 'width=600,height=400');
+            printWin.document.open();
+            printWin.document.write(windowContent);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+        });
+
+        document.getElementById('share-btn').addEventListener('click', function() {
+            const canvas = document.getElementById('barcode');
+            canvas.toBlob(function(blob) {
+                const file = new File([blob], 'barcode.png', { type: 'image/png' });
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Code-barres généré',
+                        text: 'Voici un code-barres généré par BE-ToolBox.',
+                        files: [file]
+                    }).catch(error => console.error('Error sharing:', error));
+                } else {
+                    alert('Le partage n\'est pas pris en charge sur ce navigateur.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

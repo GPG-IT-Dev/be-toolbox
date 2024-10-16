@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE-ToolBox</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.5.0/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50">
+    <div id="sidebar" class="bg-white shadow-2xl w-64 p-6 fixed h-full flex flex-col justify-between">
+        <div>
+            <img src="https://www.seiven.com/wp-content/uploads/2024/09/Logo-blanc-3-Seiven-2024.webp" alt="Logo" class="w-full mb-12">
+            <ul class="space-y-6">
+                <li><a href="pages/csv-analyzer.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m2 4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Analyseur CSV Amélioré</a></li>
+                <li><a href="pages/barcode-generator.html" class="block text-gray-800 hover:text-[#00D699] font-semibold transition duration-300 ease-in-out flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-[#00D699]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                    Générateur de code bar</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main-content" class="ml-72 flex-1">
+        <header class="w-full text-white text-center bg-gradient-to-r from-[#00D699] to-[#00B682] py-8 shadow-md rounded-b-lg">
+            <h1 class="text-4xl font-bold drop-shadow-lg">Bienvenue sur BE-ToolBox</h1>
+            <p class="text-lg mt-2">Une boîte à outils complète pour vos analyses et générateurs.</p>
+        </header>
+        
+        <main class="w-full flex flex-col items-center mt-12 px-4">
+            <div id="welcome" class="rounded-lg w-full max-w-3xl text-center p-8 bg-white shadow-lg border-t-4 border-[#00D699]">
+                <p class="text-lg text-gray-800">Utilisez les outils à gauche pour simplifier vos processus d'analyse et de génération. Nos outils vous aident à gagner du temps et à travailler plus efficacement.</p>
+                
+            </div>
+        </main>
+    </div>
+
+    <footer class="w-full bg-gradient-to-r from-[#00D699] to-[#00B682] p-6 mt-12 text-white text-center shadow-inner">
+        <p class="text-sm">BE-ToolBox - 2024 &copy; Tous droits réservés</p>
+    </footer>
+</body>
+</html>

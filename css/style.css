@@ -1,0 +1,193 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #00D699;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: #00D699;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#sidebar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 220px; /* Updated to match the new margin-left in main-content */
+    position: fixed;
+    height: 100%;
+}
+
+#sidebar img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 10px 0;
+}
+
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+    text-decoration: underline;
+    color: #00D699; /* Highlighted on hover */
+}
+
+#main-content {
+    margin-left: 240px; /* Adjusted for new sidebar width */
+    padding: 20px;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#drop-area.highlight {
+    border-color: #00D699;
+}
+
+#drop-area:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.my-form button {
+    background-color: #00D699;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.my-form button:hover {
+    background-color: #007d4f;
+    transform: scale(1.05);
+}
+
+#csv-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#csv-table th, #csv-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#csv-table th {
+    background-color: #00D699;
+    color: white;
+}
+
+#csv-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#csv-table tr:hover {
+    background-color: #ddd;
+}
+
+#sums, #category-sums {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.copy-button, .download-button {
+    background-color: #00D699;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.copy-button:hover, .download-button:hover {
+    background-color: #007d4f;
+    transform: scale(1.05);
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Success banner styling */
+#bandeau-succes {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #38a169;
+    color: #fff;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    #main-content {
+        margin-left: 0;
+    }
+    #csv-table-container table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #csv-table-container th, #csv-table-container td {
+        min-width: 120px;
+    }
+}
